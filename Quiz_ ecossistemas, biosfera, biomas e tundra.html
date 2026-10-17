@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quiz: ecossistemas, biosfera, biomas e tundra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F2F8FB;--surface:#FFFFFF;--ink:#0A1F33;--muted:#3C566B;--line:#7FA3BA;--accent:#0B5C7A;--accent-ink:#FFFFFF;--ok:#0E6B36;--ok-ink:#FFFFFF;--badge:#0A1F33;--badge-ink:#FFFFFF}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#07141F;--surface:#0E2233;--ink:#F4FAFD;--muted:#B4CBDA;--line:#5A7C95;--accent:#7CCBE8;--accent-ink:#06202D;--ok:#5FD38D;--ok-ink:#04210F;--badge:#F4FAFD;--badge-ink:#07141F}}
+:root[data-theme="dark"]{--bg:#07141F;--surface:#0E2233;--ink:#F4FAFD;--muted:#B4CBDA;--line:#5A7C95;--accent:#7CCBE8;--accent-ink:#06202D;--ok:#5FD38D;--ok-ink:#04210F;--badge:#F4FAFD;--badge-ink:#07141F}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scrollbar-width:thin;scrollbar-color:var(--accent) transparent}
+::-webkit-scrollbar{width:16px;height:16px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),var(--ok));border:5px solid transparent;background-clip:padding-box;border-radius:999px;min-height:56px;transition:border-width .15s}
+::-webkit-scrollbar-thumb:hover{border-width:3px}
+::-webkit-scrollbar-button,::-webkit-scrollbar-corner{display:none}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible","Segoe UI",Arial,sans-serif;line-height:1.35;min-height:100dvh;display:flex;flex-direction:column}
+main{flex:1;width:100%;max-width:1400px;margin:0 auto;padding:clamp(16px,3vh,40px) clamp(16px,4vw,56px);display:flex;flex-direction:column;gap:clamp(12px,2.2vh,28px)}
+.top{display:flex;align-items:center;gap:20px}
+.count{font-size:clamp(1.2rem,2vw,1.8rem);font-weight:700;white-space:nowrap}
+.bar{flex:1;height:14px;border-radius:7px;background:var(--surface);border:2px solid var(--line);overflow:hidden}
+.bar span{display:block;height:100%;background:var(--accent)}
+h1{font-size:clamp(2.4rem,5.5vw,5rem);line-height:1.1;margin:0;max-width:18ch}
+.lead{font-size:clamp(1.4rem,2.6vw,2.2rem);margin:0;max-width:34ch;color:var(--muted)}
+.q{font-size:clamp(1.9rem,min(4.2vw,7vh),3.8rem);line-height:1.15;margin:0;font-weight:700;max-width:30ch}
+.opts{list-style:none;margin:0;padding:0;display:grid;gap:clamp(8px,1.6vh,16px)}
+.opt{display:flex;align-items:center;gap:20px;background:var(--surface);border:3px solid var(--line);border-radius:14px;padding:clamp(10px,1.8vh,20px) clamp(14px,2vw,28px);font-size:clamp(1.35rem,min(2.7vw,4.6vh),2.4rem)}
+.letter{flex:none;width:2.1em;height:2.1em;border-radius:50%;background:var(--badge);color:var(--badge-ink);display:grid;place-items:center;font-weight:700}
+.opt.ok{background:var(--ok);color:var(--ok-ink);border-color:var(--ok);font-weight:700}
+.opt.ok .letter{background:var(--ok-ink);color:var(--ok)}
+.tag{margin-left:auto;font-size:.7em;white-space:nowrap;padding-left:12px}
+.why{margin:0;background:var(--surface);border-left:10px solid var(--accent);border-radius:8px;padding:clamp(10px,1.8vh,20px) clamp(14px,2vw,28px);font-size:clamp(1.2rem,min(2.2vw,3.8vh),1.9rem);max-width:60ch}
+.nav{display:flex;justify-content:space-between;gap:16px;margin-top:auto;padding-top:8px}
+button{font:inherit;font-size:clamp(1.2rem,2vw,1.7rem);font-weight:700;padding:14px 30px;border-radius:12px;border:3px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+button:disabled{opacity:.35;cursor:default}
+button:focus-visible,input:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+@media (prefers-reduced-motion: no-preference){.bar span{transition:width .3s}}
+@media (max-width:640px){.nav button{padding:12px 18px}}
+</style>
+</head>
+<body>
+<main id="main"></main>
+<script>
+var Q = [
+  {q:"Segundo o conteúdo, o que é um ecossistema?",o:["Apenas o conjunto de seres vivos de uma região","A relação entre a comunidade e as condições físico-químicas do ambiente","Apenas as condições físicas e químicas de um local","O conjunto de todos os biomas do planeta"],c:1,e:"Um ecossistema é a relação entre a comunidade (meio biótico) e as condições físico-químicas do ambiente (meio abiótico)."},
+  {q:"Qual característica é necessária para que uma região seja considerada um ecossistema?",o:["Ser autossustentável","Ter clima frio","Estar localizada no hemisfério norte","Possuir apenas vegetação"],c:0,e:"Para ser considerada um ecossistema, a região precisa ser autossustentável."},
+  {q:"O que é a biosfera?",o:["O conjunto de todos os ecossistemas existentes na Terra","Apenas os ecossistemas de água doce","A camada de gases que envolve o planeta","Um grande ecossistema com fauna, flora e clima próprios"],c:0,e:"A biosfera é o conjunto de todos os ecossistemas da Terra. A alternativa D descreve um bioma."},
+  {q:"Qual biociclo representa os ecossistemas de água doce, como rios e lagos?",o:["Epinociclo","Limnociclo","Talassociclo","Biociclo polar"],c:1,e:"O limnociclo representa a água doce. O epinociclo é o terrestre e o talassociclo é o de água salgada."},
+  {q:"Qual é o maior biociclo existente?",o:["Epinociclo","Limnociclo","Talassociclo","Todos têm o mesmo tamanho"],c:2,e:"O talassociclo, que representa os ecossistemas de água salgada, é o maior biociclo."},
+  {q:"Como os biomas são definidos no conteúdo?",o:["Pequenos ecossistemas sem clima definido","Regiões habitadas apenas por plantas","Conjuntos de seres vivos de uma única espécie","Grandes ecossistemas com fauna, flora e clima próprios"],c:3,e:"Os biomas são grandes ecossistemas com fauna, flora e clima próprios."},
+  {q:"Qual é o tipo de solo da tundra ártica?",o:["Arenoso e seco","Argiloso e fértil","Permafrost, permanentemente congelado","Bem drenado e sem gelo"],c:2,e:"A tundra ártica tem permafrost, um solo permanentemente congelado. A tundra alpina não tem permafrost."},
+  {q:"Qual é uma diferença entre a tundra alpina e a tundra ártica?",o:["A alpina fica no topo de altas montanhas e tem solo bem drenado, sem permafrost","A alpina tem muitas árvores","A alpina só existe no Polo Norte","A alpina tem solo permanentemente congelado"],c:0,e:"A tundra alpina fica no topo de altas montanhas, em vários países, e seu solo tem boa drenagem e não tem permafrost."},
+  {q:"Quais animais vivem na tundra o ano todo?",o:["Aves migratórias e renas","Ursos-polares, bois-almiscarados e lobos árticos","Pinguins e focas","Todos os mamíferos e aves da região"],c:1,e:"A maioria dos animais usa a tundra só no verão e migra no inverno. Só alguns, como ursos-polares, bois-almiscarados e lobos árticos, vivem ali o ano todo."},
+  {q:"Por que o desaparecimento da tundra causaria um colapso climático global?",o:["Porque a tundra produz a maior parte do oxigênio do planeta","Porque o permafrost guarda enormes quantidades de carbono que seriam liberadas","Porque a tundra regula a quantidade de chuva nos oceanos","Porque a tundra abriga a maior parte da fauna do mundo"],c:1,e:"O permafrost guarda cerca de 1.400 a 1.600 bilhões de toneladas de carbono. O degelo liberaria gases do efeito estufa e agravaria o aquecimento global."}
+];
+var i = -1, shown = false;
+var main = document.getElementById("main");
+
+function render(){
+  var h = "";
+  if (i < 0){
+    h = '<h1>Quiz: ecossistemas, biosfera, biomas e tundra</h1>' +
+        '<p class="lead">' + Q.length + ' perguntas. Responda em voz alta e depois clique em “Mostrar resposta”.</p>' +
+        '<div class="nav"><span></span><button id="go">Começar</button></div>';
+  } else if (i >= Q.length){
+    h = '<h1>Fim do quiz</h1><p class="lead">Você chegou ao fim das perguntas.</p>' +
+        '<div class="nav"><button class="ghost" id="prev">Voltar à última pergunta</button><button id="restart">Recomeçar</button></div>';
+  } else {
+    var x = Q[i];
+    h = '<div class="top"><span class="count">Pergunta ' + (i+1) + ' de ' + Q.length + '</span><div class="bar"><span style="width:' + ((i+1)/Q.length*100) + '%"></span></div></div>' +
+        '<h2 class="q">' + x.q + '</h2><ul class="opts">';
+    for (var k = 0; k < x.o.length; k++){
+      var ok = shown && k === x.c;
+      h += '<li class="opt' + (ok ? ' ok' : '') + '"><span class="letter">' + "ABCD".charAt(k) + '</span><span>' + x.o[k] + '</span>' + (ok ? '<span class="tag">✓ Resposta certa</span>' : '') + '</li>';
+    }
+    h += '</ul>' + (shown ? '<p class="why">' + x.e + '</p>' : '') +
+         '<div class="nav"><button class="ghost" id="prev"' + (i === 0 ? ' disabled' : '') + '>Anterior</button>' +
+         '<button id="go">' + (shown ? (i === Q.length-1 ? 'Finalizar' : 'Próxima pergunta') : 'Mostrar resposta') + '</button></div>';
+  }
+  main.innerHTML = h;
+  var g = document.getElementById("go") || document.getElementById("restart");
+  if (g) g.focus({preventScroll:true});
+  window.scrollTo(0,0);
+}
+
+function advance(){
+  if (i >= 0 && i < Q.length && !shown){ shown = true; }
+  else { i++; shown = false; }
+  render();
+}
+function back(){
+  if (i <= 0) return;
+  i--; shown = false; render();
+}
+
+main.addEventListener("click", function(e){
+  var b = e.target.closest("button"); if (!b) return;
+  if (b.id === "go") advance();
+  else if (b.id === "prev") back();
+  else if (b.id === "restart"){ i = -1; shown = false; render(); }
+});
+
+document.addEventListener("keydown", function(e){
+  var t = e.target.tagName;
+  if (t === "INPUT") return;
+  if (t === "BUTTON" && (e.key === "Enter" || e.key === " ")) return;
+  if (e.key === "ArrowRight" || e.key === "Enter" || e.key === " "){ e.preventDefault(); advance(); }
+  else if (e.key === "ArrowLeft"){ back(); }
+});
+
+render();
+</script>
+</body>
+</html>
